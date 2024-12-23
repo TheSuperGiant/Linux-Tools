@@ -1,5 +1,7 @@
 #!/bin/bash
 
+yes "" | head -n 20
+
 # Disclaimer message
 echo "Warning: I am not responsible for any data loss if you choose the wrong disk!"
 echo "Please double-check the disk you are selecting before proceeding."
