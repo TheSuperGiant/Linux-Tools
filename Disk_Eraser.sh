@@ -61,9 +61,31 @@ if ! [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
 	yes "" | head -n 5
 	echo "$ERROR_COUNT errors detected on your hard disk."
 else
+	TIMEOUT=300
 	for i in {1..3}; do
+		LAST_PROGRESS_TIME=$(date +%s)
 		echo "Pass $i: Overwriting with random data..."
-		sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress
+		while read line; do
+			LAST_PROGRESS_TIME=$(date +%s)
+		done & < <(sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress)
+		#done & < <(sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress 2>&1)
+		#sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress
+		DD_PID=$!
+		while true; do
+			
+			sleep 30
+
+			ELAPSED_TIME=$(( $(date +%s) - LAST_PROGRESS_TIME ))
+
+			if [ "$ELAPSED_TIME" -ge "$TIMEOUT" ]; then
+				echo "dd has not made progress in the last $TIMEOUT seconds. Killing the process."
+				sudo kill -9 $DD_PID
+			fi
+
+			if ! ps -p $DD_PID > /dev/null; then
+				echo "dd has finished."
+			fi
+		done
 	done
 
 	echo
