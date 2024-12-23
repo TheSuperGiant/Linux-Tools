@@ -56,8 +56,10 @@ sudo shred -v -n 1 $DISK 2>&1 | while read line; do
 done
 
 
-if [ "$ERROR_COUNT" -eq "$ERROR_LIMIT" ]; then
+if [ "$ERROR_COUNT" -ne "$ERROR_LIMIT" ]; then
 	sudo shred -v -n 2 $DISK
+	yes "" | head -n 5
+	echo "$ERROR_COUNT errors detected on your hard disk."
 else
 	for i in {1..3}; do
 		echo "Pass $i: Overwriting with random data..."
