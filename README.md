@@ -14,5 +14,9 @@ To run this script directly from the internet, you can use the following command
 ```bash
 bash <(curl -L https://raw.githubusercontent.com/TheSuperGiant/Linux-Tools/refs/heads/Arch/Disk_Eraser.sh)
 ```
+For example, live CDs like Ubuntu or Puppy OS.
+```bash
+bash <(wget -qO- https://raw.githubusercontent.com/TheSuperGiant/Linux-Tools/refs/heads/Arch/Disk_Eraser.sh)
+```
 #### bugs 
 The DD process remains active after execution hangs. Avoid making error requests in this state.
