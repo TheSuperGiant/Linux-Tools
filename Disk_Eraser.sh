@@ -43,7 +43,8 @@ ERROR_COUNT=0
 yes "" | head -n 9
 echo "----------------------------------"
 
-sudo shred -v -n 1 $DISK 2>&1 | while read -r line; do
+#sudo shred -v -n 1 $DISK 2>&1 | while read -r line; do
+while read line; do
     echo "$line"
     if echo "$line" | grep -q "Input/output error"; then
         ERROR_COUNT=$((ERROR_COUNT + 1))
@@ -54,7 +55,7 @@ sudo shred -v -n 1 $DISK 2>&1 | while read -r line; do
         #exit 1
 		break
     fi
-done
+done < < (sudo shred -v -n 1 $DISK 2>&1)
 
 echo $ERROR_COUNT
 
