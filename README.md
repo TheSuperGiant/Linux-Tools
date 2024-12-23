@@ -13,3 +13,6 @@ Please double-check the disk you are selecting before proceeding.
 To run this script directly from the internet, you can use the following command in your terminal:    
 ```bash
 bash <(curl -L https://raw.githubusercontent.com/TheSuperGiant/Linux-Tools/refs/heads/Arch/Disk_Eraser.sh)
+```
+#### bugs 
+The DD process remains active after execution hangs. Avoid making error requests in this state.
