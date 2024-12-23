@@ -55,7 +55,7 @@ while read line; do
         #exit 1
 		break
     fi
-done < < (sudo shred -v -n 1 $DISK 2>&1)
+done < <(sudo shred -v -n 1 $DISK 2>&1)
 
 echo $ERROR_COUNT
 
