@@ -37,7 +37,7 @@ while true; do
 	yes "" | head -n 9
 done
 
-ERROR_LIMIT=50
+ERROR_LIMIT=5
 ERROR_COUNT=0
 
 yes "" | head -n 9
