@@ -56,6 +56,7 @@ sudo shred -v -n 1 $DISK 2>&1 | while read line; do
     fi
 done
 
+echo $ERROR_COUNT
 
 if [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
 	sudo shred -v -n 2 $DISK
