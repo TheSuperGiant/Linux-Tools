@@ -43,7 +43,6 @@ ERROR_COUNT=0
 yes "" | head -n 9
 echo "----------------------------------"
 
-#sudo shred -v -n 1 $DISK 2>&1 | while read -r line; do
 while read line; do
     echo "$line"
     if echo "$line" | grep -q "Input/output error"; then
@@ -52,12 +51,10 @@ while read line; do
     fi
     if [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
         echo "Reached error limit ($ERROR_LIMIT). Stopping."
-        #exit 1
 		break
     fi
 done < <(sudo shred -v -n 1 $DISK 2>&1)
 
-echo $ERROR_COUNT
 
 if ! [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
 	sudo shred -v -n 2 $DISK
