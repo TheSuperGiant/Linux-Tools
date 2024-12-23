@@ -10,3 +10,5 @@ After that, there will be an additional confirmation step. If you have selected 
 I am not responsible for any data loss if you choose the wrong disk!    
 Please double-check the disk you are selecting before proceeding.
 ###### url
+To run this script directly from the internet, you can use the following command in your terminal:
+bash <(curl -L https://raw.githubusercontent.com/TheSuperGiant/Linux-Tools/refs/heads/Arch/Disk_Eraser.sh) 
