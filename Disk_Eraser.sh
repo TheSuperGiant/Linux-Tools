@@ -37,7 +37,7 @@ while true; do
 	yes "" | head -n 9
 done
 
-ERROR_LIMIT=5
+ERROR_LIMIT=1
 ERROR_COUNT=0
 
 yes "" | head -n 9
@@ -58,15 +58,14 @@ done
 
 echo $ERROR_COUNT
 
-if [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
+if ! [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
 	sudo shred -v -n 2 $DISK
 	yes "" | head -n 5
 	echo "$ERROR_COUNT errors detected on your hard disk."
 else
 	for i in {1..3}; do
 		echo "Pass $i: Overwriting with random data..."
-		#sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress
-		sudo timeout 3600 dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress
+		sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress
 	done
 
 	echo
