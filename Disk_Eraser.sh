@@ -45,10 +45,10 @@ echo "----------------------------------"
 
 sudo shred -v -n 1 $DISK 2>&1 | while read -r line; do
     echo "$line"
-    #if echo "$line" | grep -q "Input/output error"; then
+    if echo "$line" | grep -q "Input/output error"; then
         ERROR_COUNT=$((ERROR_COUNT + 1))
         echo "Error $ERROR_COUNT detected"
-    #fi
+    fi
     if [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
         echo "Reached error limit ($ERROR_LIMIT). Stopping."
         #exit 1
