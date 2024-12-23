@@ -51,12 +51,13 @@ sudo shred -v -n 1 $DISK 2>&1 | while read line; do
     fi
     if [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
         echo "Reached error limit ($ERROR_LIMIT). Stopping."
-        exit 1
+        #exit 1
+		break
     fi
 done
 
 
-if [ "$ERROR_COUNT" -ne "$ERROR_LIMIT" ]; then
+if ! [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
 	sudo shred -v -n 2 $DISK
 	yes "" | head -n 5
 	echo "$ERROR_COUNT errors detected on your hard disk."
