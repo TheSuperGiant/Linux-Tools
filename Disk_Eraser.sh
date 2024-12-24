@@ -63,41 +63,90 @@ if ! [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
 	echo "$ERROR_COUNT errors detected on your hard disk."
 else
 	#TIMEOUT=300
-	TIMEOUT=5
+	#TIMEOUT=5
 	for i in {1..3}; do
-		LAST_PROGRESS_TIME=$(date +%s)
 		echo "Pass $i: Overwriting with random data..."
-		sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress &
-		watch -n 30 'sudo kill -USR1 $(pidof dd)'
+		
+		
+		
+		
+		#sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress &
+		#--------------------------
+		#sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress &
+		#watch -n 30 'sudo kill -USR1 $(pidof dd)'
 		#while read line; do
 			#LAST_PROGRESS_TIME=$(date +%s)
 		#done & < <(sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress)
 		#done & < <(sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress 2>&1)
 		#sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress
 		#DD_PID=$!
-		DD_PID=$(pgrep -f 'sudo dd if.*of=$DISK')
+		#DD_PID=$(pgrep -f 'sudo dd if.*of=$DISK')
 		
-		while true; do
-			testing=$((testing + 1))
-			echo $testing
-			echo "$line test"
+		#while true; do
+			#testing=$((testing + 1))
+			#echo $testing
+			#echo "$line test"
 			
-			sleep 30
+			#sleep 30
 
-			ELAPSED_TIME=$(( $(date +%s) - LAST_PROGRESS_TIME ))
+			#ELAPSED_TIME=$(( $(date +%s) - LAST_PROGRESS_TIME ))
 
-			if [ "$ELAPSED_TIME" -ge "$TIMEOUT" ]; then
+			#if [ "$ELAPSED_TIME" -ge "$TIMEOUT" ]; then
 				#echo "dd has not made progress in the last $TIMEOUT seconds. Killing the process."
 				#sudo kill -9 $DD_PID
-				if [[ $DD_PID != "" ]]; then
-					sudo kill -9 $DD_PID
+				#if [[ $DD_PID != "" ]]; then
+					#sudo kill -9 $DD_PID
 					#break
-				fi
-			fi
+				#fi
+			#fi
 			#echo test
-		done
-	done
+		#done
+		
+		
+		
+	#============================
+	
 
+
+		block_size="1M"
+		check_interval=10
+
+		sudo dd if=/dev/urandom of="$disk" bs=$block_size status=progress &
+		dd_pid=$!
+
+		last_progress=0
+		elapsed_time=0
+
+		while kill -0 $dd_pid 2>/dev/null; do
+			current_progress=$(ps -p $dd_pid -o etimes=)
+
+			if [ "$current_progress" == "$last_progress" ]; then
+				((elapsed_time++))
+				echo "No progress detected for $elapsed_time seconds."
+
+				if [ $elapsed_time -ge $check_interval ]; then
+					echo "No progress for $check_interval seconds, killing dd process."
+					sudo kill $dd_pid
+					wait $dd_pid
+					exit 1
+				fi
+			else
+				elapsed_time=0
+			fi
+
+			last_progress=$current_progress
+
+			sleep 1
+		done
+		
+		
+	
+	#--------------------------
+	
+	
+	
+	done
+	
 	echo
 	echo
 	echo "----------------------------------"
