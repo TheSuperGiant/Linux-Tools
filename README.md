@@ -1,7 +1,7 @@
 # Linux-Tools
 I will add some Linux tools here. They are small scripts for tasks you occasionally need and are easy to use.
 
-# Disk Eraser
+# Disk Eraser (Removed for now)
 This tool erases a disk multiple times, making it nearly impossible for anyone to recover the data.
 It will list all available disks (e.g., /dev/sda, /dev/sdb, /dev/sdc).
 If you want to erase the disk labeled "sdc", simply type "c".
