@@ -65,9 +65,11 @@ else
 	for i in {1..3}; do
 		LAST_PROGRESS_TIME=$(date +%s)
 		echo "Pass $i: Overwriting with random data..."
-		while read line; do
-			LAST_PROGRESS_TIME=$(date +%s)
-		done & < <(sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress)
+		sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress &
+		watch -n 30 'kill -USR1 $(pidof dd)'
+		#while read line; do
+			#LAST_PROGRESS_TIME=$(date +%s)
+		#done & < <(sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress)
 		#done & < <(sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress 2>&1)
 		#sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress
 		#DD_PID=$!
