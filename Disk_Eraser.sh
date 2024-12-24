@@ -61,7 +61,7 @@ if ! [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
 	yes "" | head -n 5
 	echo "$ERROR_COUNT errors detected on your hard disk."
 else
-	TIMEOUT=300
+	TIMEOUT=5
 	for i in {1..3}; do
 		LAST_PROGRESS_TIME=$(date +%s)
 		echo "Pass $i: Overwriting with random data..."
