@@ -74,6 +74,9 @@ else
 		DD_PID=$(pgrep -f 'sudo dd if.*of=$DISK')
 		
 		while true; do
+			testing=$((testing + 1))
+			echo $testing
+			echo "$line test"
 			
 			sleep 30
 
@@ -87,7 +90,7 @@ else
 					#break
 				fi
 			fi
-			echo test
+			#echo test
 		done
 	done
 
