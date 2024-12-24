@@ -38,6 +38,7 @@ while true; do
 done
 
 ERROR_LIMIT=1
+#ERROR_LIMIT=50
 ERROR_COUNT=0
 
 yes "" | head -n 9
@@ -61,12 +62,13 @@ if ! [ "$ERROR_COUNT" -ge "$ERROR_LIMIT" ]; then
 	yes "" | head -n 5
 	echo "$ERROR_COUNT errors detected on your hard disk."
 else
+	#TIMEOUT=300
 	TIMEOUT=5
 	for i in {1..3}; do
 		LAST_PROGRESS_TIME=$(date +%s)
 		echo "Pass $i: Overwriting with random data..."
 		sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress &
-		watch -n 30 'kill -USR1 $(pidof dd)'
+		watch -n 30 'sudo kill -USR1 $(pidof dd)'
 		#while read line; do
 			#LAST_PROGRESS_TIME=$(date +%s)
 		#done & < <(sudo dd if=/dev/urandom of=$DISK bs=1M conv=noerror,sync status=progress)
