@@ -84,6 +84,7 @@ else
 				#sudo kill -9 $DD_PID
 				if [[ $DD_PID != "" ]]; then
 					sudo kill -9 $DD_PID
+					break
 				fi
 			fi
 			echo test
