@@ -108,10 +108,10 @@ else
 	
 
 
-		block_size="1M"
+		
 		check_interval=10
 
-		sudo dd if=/dev/urandom of="$disk" bs=$block_size status=progress &
+		sudo dd if=/dev/urandom of=$disk bs=1M status=progress &
 		dd_pid=$!
 
 		last_progress=0
