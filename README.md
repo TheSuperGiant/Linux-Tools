@@ -19,4 +19,17 @@ For example, live CDs like Ubuntu or Puppy OS.
 bash <(wget -qO- https://raw.githubusercontent.com/TheSuperGiant/Linux-Tools/refs/heads/Arch/Disk_Eraser.sh)
 ```
 #### bugs 
-The DD process remains active after execution hangs. Avoid making error requests in this state.
+
+# Request for Solution: Hanging `dd` Process
+
+## Issue
+The `dd` command hangs and becomes unresponsive during execution without completing the task.
+
+## Request
+If you have encountered and solved this issue, please share any solutions or workarounds for resolving the hanging `dd` process.
+
+## Requirements
+- Solution should specifically address resolving the hang or freeze issue with `dd`.
+- Please provide any relevant steps, commands, or tips that worked for you.
+
+Thank you for your help!
