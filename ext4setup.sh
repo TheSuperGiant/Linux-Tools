@@ -11,13 +11,9 @@ while true; do
 		if [[ $round == "1" ]];then
 			clear
 		fi
-		#echo -e "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-		#lsblk -o NAME,TYPE,SIZE,LABEL | grep -E "^(.*) (disk|part) (.*)$"
 		lsblk -o NAME,TYPE,SIZE,LABEL,MODEL | awk 'NR==1{print;next} $2=="disk" && NR>1{print "--------------------------------------------------"} $2=="disk" || $2=="part"{print}'
 		echo "--------------------------------------------------"
 
-		#lsblk -o NAME,TYPE,SIZE,LABEL,MODEL | awk 'NR==1 || $2=="disk" || $2=="part"'
-		
 		read -p "Enter the disk letter (e.g., 'c' for /dev/sdX): " disk_letter; disk_letter="${disk_letter,,}"
 		DISK="/dev/sd${disk_letter}"
 		if [ ! -e "$DISK" ]; then
@@ -34,7 +30,6 @@ while true; do
 	echo "Disk information for $DISK:"
 	echo "----------------------------------"
 	lsblk -o NAME,TYPE,SIZE,LABEL,MODEL $DISK
-	#lsblk -o NAME,TYPE,SIZE,LABEL | grep -E "^(.*) (disk|part) (.*)$"
 	
 	echo
 	echo
