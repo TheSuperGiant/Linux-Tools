@@ -1,6 +1,25 @@
 # Linux-Tools
 I will add some Linux tools here. They are small scripts for tasks you occasionally need and are easy to use.
 
+# ext4setup
+This will remove all partitions (if any) on the disk and format the whole disk with one partition (partition 1) using **ext4**.
+
+It asks:
+- Disk letter of `/dev/sdX` (for example, if it’s `/dev/sdb`, type `b`)
+- Confirm if this is the correct disk (`y` for yes)
+- Enter a label name for the disk
+
+The rest runs automatically.
+
+#### ⚠️ Warning:
+This will overwrite all data on the selected disk. I am not responsible for any data loss if you choose the wrong disk!  
+Please double-check the disk you are selecting before proceeding.
+#### Execution
+To run this script directly from the internet, use the following command in your terminal:
+```bash
+bash <(curl -L https://raw.githubusercontent.com/TheSuperGiant/Linux-Tools/refs/heads/Stable/ext4setup.sh)
+```
+
 # Disk Eraser (Removed for now)
 This tool erases a disk multiple times, making it nearly impossible for anyone to recover the data.
 It will list all available disks (e.g., /dev/sda, /dev/sdb, /dev/sdc).
