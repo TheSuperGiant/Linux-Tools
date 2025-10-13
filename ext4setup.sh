@@ -1,5 +1,5 @@
+#!/bin/bash
 ext4setup() {
-	#!/bin/bash
     
     clear
 
@@ -50,24 +50,9 @@ ext4setup() {
     partitions=$(ls ${DISK}* | grep -E "^${DISK}[0-9]$" | wc -l)
     
     for ((i=1; i<=partitions; i++)); do
-        #sudo fdisk "$DISK" <<EOF
-#d
-#
-#w
-#q   
-#EOF
         printf "d\n$i\n" | fdisk "$DISK"
-        #echo "w" | fdisk "$DISK"
     done
     echo -e "g\nn\n\n\n\nw" | fdisk "$DISK"
-	#sudo fdisk "$DISK" <<EOF
-#g
-#n
-
-
-
-#w
-#EOF
     
     if [[ $disk_letter =~ ^[0-9]$ ]];then
         DISK="${DISK}p"
