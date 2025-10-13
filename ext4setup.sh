@@ -9,20 +9,25 @@ ext4setup() {
 
 	while true; do
 		while true; do
-			if [[ $round == "1" ]];then
-				clear
-			fi
 			lsblk -o NAME,TYPE,SIZE,LABEL,MODEL | awk 'NR==1{print;next} $2=="disk" && NR>1{print "--------------------------------------------------"} $2=="disk" || $2=="part"{print}'
 			echo "--------------------------------------------------"
 
-			read -p "Enter the disk letter (e.g., 'c' for /dev/sdX): " disk_letter; disk_letter="${disk_letter,,}"
-			DISK="/dev/sd${disk_letter}"
+			read -p "Enter disk (e.g., 'a-z' for /dev/sdX or '0,1,..' for /dev/nvmeXn1): " disk_letter; disk_letter="${disk_letter,,}"
+            if [[ $disk_letter =~ ^[a-z]$ ]];then
+			    DISK="/dev/sd${disk_letter}"
+            else
+                DISK="/dev/nvme${disk_letter}n1"
+            fi
 			if [ ! -e "$DISK" ]; then
-				echo "You didn't provide an existing disk letter."
+                clear
+				echo "Disk not found. Try again."
 				echo
 				echo
 			else
 				round=1
+                if [[ $disk_letter == [0-9] ]];then
+                    DISK="${DISK}p"
+                fi
 				break
 			fi
 		done
@@ -58,4 +63,5 @@ EOF
 		sudo mkfs.ext4 -F -L $label "${DISK}1"
 	fi
 }
+export -f ext4setup
 ext4setup
