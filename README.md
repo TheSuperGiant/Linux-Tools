@@ -15,9 +15,13 @@ The rest runs automatically.
 This will overwrite all data on the selected disk. I am not responsible for any data loss if you choose the wrong disk!  
 Please double-check the disk you are selecting before proceeding.
 #### Execution
-To run this script directly from the internet, use the following command in your terminal:
+To run this script, use the following command in your terminal:
 ```bash
 source <(curl -L https://raw.githubusercontent.com/TheSuperGiant/Linux-Tools/refs/heads/Stable/ext4setup.sh)
+```
+ext4setup is now available in this terminal session:
+```bash
+ext4setup
 ```
 
 # Disk Eraser (Removed for now)
