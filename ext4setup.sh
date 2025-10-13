@@ -25,7 +25,7 @@ ext4setup() {
 				echo
 			else
 				round=1
-                if [[ $disk_letter == [0-9] ]];then
+                if [[ $disk_letter =~ ^[0-9]$ ]];then
                     DISK="${DISK}p"
                 fi
 				break
