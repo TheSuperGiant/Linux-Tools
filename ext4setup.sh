@@ -50,9 +50,10 @@ ext4setup() {
     if [[ $disk_letter =~ ^[0-9]$ ]];then
         DISK="${DISK}p"
     fi
+    
     partitions=$(ls ${DISK}* | grep -E "^${DISK}[0-9]$" | wc -l)
     
-    for ((i=1; i<=count; i++)); do
+    for ((i=1; i<=partitions; i++)); do
         sudo fdisk "$DISK" <<EOF
 d
         
