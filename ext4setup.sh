@@ -81,5 +81,4 @@ ext4setup() {
 		sudo mkfs.ext4 -F -L $label "${DISK}1"
 	fi
 }
-export -f ext4setup
 ext4setup
