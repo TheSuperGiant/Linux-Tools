@@ -1,5 +1,7 @@
 ext4setup() {
 	#!/bin/bash
+    
+    clear
 
 	# Disclaimer message
 	echo "Warning: I am not responsible for any data loss if you choose the wrong disk!"
@@ -39,15 +41,30 @@ ext4setup() {
 		read -p "Are you sure you want to format disk $DISK? Type 'y' to proceed: " confirm; confirm="${confirm,,}"
 		if [ $confirm = "y" ]; then
 			disk_type=$(lsblk -d -o ROTA -n "$DISK")
-            if [[ $disk_letter =~ ^[0-9]$ ]];then
-                DISK="${DISK}p"
-            fi
 			break
 		fi
 	done
 
-	read -p "Disk Label: " label
-
+	#read -p "Disk Label: " label
+    
+    if [[ $disk_letter =~ ^[0-9]$ ]];then
+    #if [[ $disk_letter =~ ^[a-z]$ ]];then
+        #partitions=$(ls /dev/sd${DISK}* | grep -E '^/dev/sda[0-9]$' | wc -l)
+       #partitions=$(ls ${DISK}* | grep -E "^${DISK}[0-9]$" | wc -l)
+    #else
+        DISK="${DISK}p"
+        #partitions=$(ls ${DISK}* | grep -E '^${DISK}[0-9]$' | wc -l)
+        #DISK="${DISK}p"
+    fi
+    partitions=$(ls ${DISK}* | grep -E "^${DISK}[0-9]$" | wc -l)
+    echo $partitions #tempeory
+    read -p "Disk Label: " label #tempeory
+    for ((i=1; i<=count; i++)); do
+        sudo fdisk "$DISK" <<EOF
+        d
+        
+EOF
+    done
 	sudo fdisk "$DISK" <<EOF
 g
 n
