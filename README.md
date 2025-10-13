@@ -17,7 +17,7 @@ Please double-check the disk you are selecting before proceeding.
 #### Execution
 To run this script directly from the internet, use the following command in your terminal:
 ```bash
-bash <(curl -L https://raw.githubusercontent.com/TheSuperGiant/Linux-Tools/refs/heads/Stable/ext4setup.sh)
+source <(curl -L https://raw.githubusercontent.com/TheSuperGiant/Linux-Tools/refs/heads/Stable/ext4setup.sh)
 ```
 
 # Disk Eraser (Removed for now)
