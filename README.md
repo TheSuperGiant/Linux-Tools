@@ -5,7 +5,7 @@ I will add some Linux tools here. They are small scripts for tasks you occasiona
 This will remove all partitions (if any) on the disk and format the whole disk with one partition (partition 1) using **ext4**.
 
 It asks:
-- Disk letter of `/dev/sdX` (for example, if it’s `/dev/sdb`, type `b`)
+- Enter the disk letter or NVMe number (for example, type b for /dev/sdb or 0 for /dev/nvme0n1)
 - Confirm if this is the correct disk (`y` for yes)
 - Enter a label name for the disk
 
