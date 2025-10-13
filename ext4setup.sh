@@ -47,10 +47,6 @@ ext4setup() {
 
 	read -p "Disk Label: " label
     
-    if [[ $disk_letter =~ ^[0-9]$ ]];then
-        DISK="${DISK}p"
-    fi
-    
     partitions=$(ls ${DISK}* | grep -E "^${DISK}[0-9]$" | wc -l)
     
     for ((i=1; i<=partitions; i++)); do
@@ -72,6 +68,10 @@ ext4setup() {
 
 #w
 #EOF
+    
+    if [[ $disk_letter =~ ^[0-9]$ ]];then
+        DISK="${DISK}p"
+    fi
 
 	if [[ $disk_type == "1" ]];then #hdd
 		sudo mkfs.ext4 -F -c -L $label "${DISK}1"
