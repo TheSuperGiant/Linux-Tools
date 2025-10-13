@@ -37,11 +37,11 @@ ext4setup() {
 		echo
 		echo
 		read -p "Are you sure you want to format disk $DISK? Type 'y' to proceed: " confirm; confirm="${confirm,,}"
-        if [[ $disk_letter =~ ^[0-9]$ ]];then
-            DISK="${DISK}p"
-        fi
 		if [ $confirm = "y" ]; then
 			disk_type=$(lsblk -d -o ROTA -n "$DISK")
+            if [[ $disk_letter =~ ^[0-9]$ ]];then
+                DISK="${DISK}p"
+            fi
 			break
 		fi
 	done
