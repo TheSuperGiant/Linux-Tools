@@ -71,7 +71,7 @@ ext4setup() {
 
 
 #w
-EOF
+#EOF
 
 	if [[ $disk_type == "1" ]];then #hdd
 		sudo mkfs.ext4 -F -c -L $label "${DISK}1"
