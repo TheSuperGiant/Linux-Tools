@@ -45,23 +45,16 @@ ext4setup() {
 		fi
 	done
 
-	#read -p "Disk Label: " label
+	read -p "Disk Label: " label
     
     if [[ $disk_letter =~ ^[0-9]$ ]];then
-    #if [[ $disk_letter =~ ^[a-z]$ ]];then
-        #partitions=$(ls /dev/sd${DISK}* | grep -E '^/dev/sda[0-9]$' | wc -l)
-       #partitions=$(ls ${DISK}* | grep -E "^${DISK}[0-9]$" | wc -l)
-    #else
         DISK="${DISK}p"
-        #partitions=$(ls ${DISK}* | grep -E '^${DISK}[0-9]$' | wc -l)
-        #DISK="${DISK}p"
     fi
     partitions=$(ls ${DISK}* | grep -E "^${DISK}[0-9]$" | wc -l)
-    echo $partitions #tempeory
-    read -p "Disk Label: " label #tempeory
+    
     for ((i=1; i<=count; i++)); do
         sudo fdisk "$DISK" <<EOF
-        d
+d
         
 EOF
     done
