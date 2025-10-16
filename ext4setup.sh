@@ -1,22 +1,5 @@
 #!/usr/bin/env bash
 ext4setup() {
-	error() {
-		echo -e "\e[1;91m$1\e[0m"
-	}
-	label_check(){
-
-		while true; do
-
-			read -p "Disk Label: " label
-
-			if [[ "$label" =~ ^("root"|"home"|"swap"|"boot") || ! "$label" =~ ^[A-Za-z0-9_-]{1,16}$ ]];then
-				clear
-				error "$label: is not allowed! \nAllowed: 1–16 letters, numbers, - or _ (no spaces or special characters)\nnot allowed names: root home swap boot\n\n"
-			else
-				return
-			fi
-		done
-	}
 
     clear
 
@@ -66,10 +49,10 @@ ext4setup() {
     
     partitions=$(ls ${DISK}* | grep -E "^${DISK}[0-9]$" | wc -l)
     
-    #for ((i=1; i<=partitions; i++)); do
-    	#printf "d\n$i\n" | fdisk "$DISK"
-    #done
-    #echo -e "g\nn\n\n\n\nw" | fdisk "$DISK"
+    for ((i=1; i<=partitions; i++)); do
+    	printf "d\n$i\n" | fdisk "$DISK"
+    done
+    echo -e "g\nn\n\n\n\nw" | fdisk "$DISK"
     
     if [[ $disk_letter =~ ^[0-9]$ ]];then
         DISK="${DISK}p"
