@@ -30,8 +30,8 @@ ext4setup() {
 		while true; do
 			lsblk -o NAME,TYPE,SIZE,LABEL,MODEL | awk 'NR==1{print;next} $2=="disk" && NR>1{print "--------------------------------------------------"} $2=="disk" || $2=="part"{print}'
 			echo "--------------------------------------------------"
-
-			#read -p "Enter disk (e.g., 'a-z' for /dev/sdX or '0,1,..' for /dev/nvmeXn1): " disk_letter; disk_letter="${disk_letter,,}"
+			
+			printf "Enter disk (e.g., 'a-z' for /dev/sdX or '0,1,..' for /dev/nvmeXn1): "; read disk_letter; disk_letter=$(echo "$disk_letter" | tr '[:upper:]' '[:lower:]')
             if [[ $disk_letter =~ ^[a-z]$ ]];then
 			    DISK="/dev/sd${disk_letter}"
             else
@@ -54,7 +54,7 @@ ext4setup() {
 		
 		echo
 		echo
-		#read -p "Are you sure you want to format disk $DISK? Type 'y' to proceed: " confirm; confirm="${confirm,,}"
+		printf "Are you sure you want to format disk $DISK? Type 'y' to proceed: "; read confirm; confirm=$(echo "$confirm" | tr '[:upper:]' '[:lower:]')
 		if [ $confirm = "y" ]; then
 			disk_type=$(lsblk -d -o ROTA -n "$DISK")
 			break
