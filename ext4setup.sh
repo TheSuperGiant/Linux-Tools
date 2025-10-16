@@ -6,8 +6,8 @@ ext4setup() {
 	label_check(){
 
 		while true; do
-
-			read -p "Disk Label: " label
+			
+			printf "Enter label for the partition: "; read label
 
 			if [[ "$label" =~ ^("root"|"home"|"swap"|"boot") || ! "$label" =~ ^[A-Za-z0-9_-]{1,16}$ ]];then
 				clear
