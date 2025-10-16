@@ -66,10 +66,10 @@ ext4setup() {
     
     partitions=$(ls ${DISK}* | grep -E "^${DISK}[0-9]$" | wc -l)
     
-    for ((i=1; i<=partitions; i++)); do
-    	printf "d\n$i\n" | fdisk "$DISK"
-    done
-    echo -e "g\nn\n\n\n\nw" | fdisk "$DISK"
+    #for ((i=1; i<=partitions; i++)); do
+    	#printf "d\n$i\n" | fdisk "$DISK"
+    #done
+    #echo -e "g\nn\n\n\n\nw" | fdisk "$DISK"
     
     if [[ $disk_letter =~ ^[0-9]$ ]];then
         DISK="${DISK}p"
