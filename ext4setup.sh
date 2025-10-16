@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ext4setup() {
 	error() {
 		echo -e "\e[1;91m$1\e[0m"
@@ -67,7 +67,7 @@ ext4setup() {
     partitions=$(ls ${DISK}* | grep -E "^${DISK}[0-9]$" | wc -l)
     
     for ((i=1; i<=partitions; i++)); do
-        printf "d\n$i\n" | fdisk "$DISK"
+    	printf "d\n$i\n" | fdisk "$DISK"
     done
     echo -e "g\nn\n\n\n\nw" | fdisk "$DISK"
     
