@@ -76,10 +76,8 @@ ext4setup() {
     fi
 
 	if [[ "$disk_type" == "1" ]];then #hdd
-		echo "klaas"
 		sudo mkfs.ext4 -F -c -L $label "${DISK}1"
 	elif [[ "$disk_type" == "0" ]];then #flash drives
-		echo "cow"
 		sudo mkfs.ext4 -F -L $label "${DISK}1"
 	fi
 }
