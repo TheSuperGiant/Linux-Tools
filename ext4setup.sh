@@ -56,7 +56,7 @@ ext4setup() {
 		echo
 		printf "Are you sure you want to format disk $DISK? Type 'y' to proceed: "; read confirm; confirm=$(echo "$confirm" | tr '[:upper:]' '[:lower:]')
 		if [ $confirm = "y" ]; then
-			disk_type=$(lsblk -d -o ROTA -n "$DISK")
+			disk_type=$(lsblk -d -o ROTA -n "$DISK" | xargs)
 			break
 		fi
 	done
@@ -75,9 +75,11 @@ ext4setup() {
         DISK="${DISK}p"
     fi
 
-	if [[ $disk_type == "1" ]];then #hdd
+	if [[ "$disk_type" == "1" ]];then #hdd
+		echo "klaas"
 		sudo mkfs.ext4 -F -c -L $label "${DISK}1"
-	elif [[ $disk_type == "0" ]];then #flash drives
+	elif [[ "$disk_type" == "0" ]];then #flash drives
+		echo "cow"
 		sudo mkfs.ext4 -F -L $label "${DISK}1"
 	fi
 }
