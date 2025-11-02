@@ -17,7 +17,7 @@ Please double-check the disk you are selecting before proceeding.
 #### Execution
 To run this script, use the following command in your terminal:
 ```bash
-source <(curl -L https://raw.githubusercontent.com/TheSuperGiant/Linux-Tools/refs/heads/Stable/ext4setup.sh)
+source <(curl -L https://raw.githubusercontent.com/TheSuperGiant/linux-tools/refs/heads/Stable/ext4setup.sh)
 ```
 ext4setup is now available in this terminal session:
 ```bash
