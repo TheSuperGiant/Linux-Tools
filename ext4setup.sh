@@ -24,7 +24,7 @@ ext4setup() {
 	echo "Warning: I am not responsible for any data loss if you choose the wrong disk!"
 	echo "Please double-check the disk you are selecting before proceeding."
 
-	echo -e "\n\n⚠️ WARNING: This will erase all data on that disk.⚠️\n\n"
+	printf "\n\n⚠️ WARNING: This will erase all data on that disk.⚠️\n\n\n"
 
 	while true; do
 		while true; do
@@ -81,4 +81,5 @@ ext4setup() {
 		sudo mkfs.ext4 -F -L $label "${DISK}1"
 	fi
 }
+export -f ext4setup
 ext4setup
