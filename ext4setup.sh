@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 if [ -z "$BASH_VERSION" ]; then
-	exec bash --login
+	exec bash
 fi
 ext4setup() {
 	error() {
