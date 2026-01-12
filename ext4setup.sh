@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-exec bash --login
+if [ -z "$BASH_VERSION" ]; then
+	exec bash --login
+fi
 ext4setup() {
 	error() {
 		echo -e "\e[1;91m$1\e[0m"
