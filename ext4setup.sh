@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-if [ -z "$BASH_VERSION" ]; then
-	exec bash
-fi
 ext4setup() {
 	error() {
 		echo -e "\e[1;91m$1\e[0m"
