@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+exec bash --login
 ext4setup() {
 	error() {
 		echo -e "\e[1;91m$1\e[0m"
@@ -81,5 +82,4 @@ ext4setup() {
 		sudo mkfs.ext4 -F -L $label "${DISK}1"
 	fi
 }
-export -f ext4setup
 ext4setup
