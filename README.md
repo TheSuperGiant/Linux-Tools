@@ -9,7 +9,7 @@ It asks:
 The rest runs automatically.
 
 #### ⚠️ Warning:
-This will overwrite all data on the selected disk. I am not responsible for any data loss if you choose the wrong disk!  
+This will overwrite all data on the selected disk. I am not responsible for any data loss if you choose the wrong disk!
 Please double-check the disk you are selecting before proceeding.
 #### Execution
 To run this script, use the following command in your terminal:
